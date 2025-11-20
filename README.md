@@ -1,5 +1,5 @@
 ## TNT Time
-Display the time until detonation of a piece of TNT
+Display the time until detonation of a piece of TNT.
 Now with OneConfig.
 
 ---
