@@ -1,7 +1,6 @@
 package club.sk1er.mods.tnttime.mixins;
 
 import club.sk1er.mods.tnttime.TNTTime;
-import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityTNTPrimed;
@@ -9,7 +8,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.Redirect;
+import org.spongepowered.asm.mixin.injection.ModifyArg;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.awt.*;
@@ -23,10 +22,10 @@ public class RenderMixin {
         tntTime$capturedEntity = entityIn;
     }
 
-    @Redirect(
-            method = "renderLivingLabel", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/FontRenderer;drawString(Ljava/lang/String;III)I")
+    @ModifyArg(
+            method = "renderLivingLabel", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/FontRenderer;drawString(Ljava/lang/String;III)I"), index = 3
     )
-    private int updateTimer(FontRenderer instance, String text, int x, int y, int color) {
+    private int updateColor(int color) {
         if (tntTime$capturedEntity instanceof EntityTNTPrimed) {
             EntityTNTPrimed tnt = (EntityTNTPrimed) tntTime$capturedEntity;
 
@@ -36,6 +35,6 @@ public class RenderMixin {
             color = timerColor.getRGB();
         }
 
-        return instance.drawString(text, x, y, color);
+        return color;
     }
 }
