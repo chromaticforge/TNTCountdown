@@ -13,7 +13,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.awt.*;
 
-@Mixin(Render.class)
+@Mixin(value = Render.class, priority = 995)
 public class RenderMixin {
     @Unique private Entity tntTime$capturedEntity;
 
