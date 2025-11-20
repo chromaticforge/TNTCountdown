@@ -23,7 +23,9 @@ public class RenderMixin {
     }
 
     @ModifyArg(
-            method = "renderLivingLabel", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/FontRenderer;drawString(Ljava/lang/String;III)I"), index = 3
+            method = "renderLivingLabel",
+            at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/FontRenderer;drawString(Ljava/lang/String;III)I", ordinal = 1),
+            index = 3
     )
     private int updateColor(int color) {
         if (tntTime$capturedEntity instanceof EntityTNTPrimed) {
