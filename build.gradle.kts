@@ -1,4 +1,7 @@
+import com.modrinth.minotaur.dependencies.DependencyType
+import com.modrinth.minotaur.dependencies.ModDependency
 import dev.deftu.gradle.utils.GameSide
+import dev.deftu.gradle.utils.VersionType
 
 plugins {
     id("java")
@@ -8,6 +11,7 @@ plugins {
     id("dev.deftu.gradle.tools.bloom") version(dgtVer)
     id("dev.deftu.gradle.tools.shadow") version(dgtVer)
     id("dev.deftu.gradle.tools.minecraft.loom") version(dgtVer)
+    id("dev.deftu.gradle.tools.minecraft.releases") version(dgtVer)
 }
 
 repositories {
@@ -33,4 +37,19 @@ toolkitLoomHelper {
     useDevAuth("1.2.1")
     useProperty("mixin.debug.export", "true", GameSide.CLIENT)
     disableRunConfigs(GameSide.SERVER)
+}
+
+toolkitReleases {
+    versionType = VersionType.RELEASE
+
+    val changelog = rootProject.file("changelogs/${modData.version}.md")
+
+    if (changelog.exists()) {
+        changelogFile.set(changelog)
+    }
+
+    modrinth {
+        projectId.set("tnttime-oneconfig")
+        dependencies.add(ModDependency("oneconfig", DependencyType.EMBEDDED))
+    }
 }

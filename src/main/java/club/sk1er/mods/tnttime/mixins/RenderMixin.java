@@ -11,11 +11,10 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyArg;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import java.awt.*;
-
 @Mixin(value = Render.class, priority = 995)
 public class RenderMixin {
-    @Unique private Entity tntTime$capturedEntity;
+    @Unique
+    private Entity tntTime$capturedEntity;
 
     @Inject(method = "renderLivingLabel", at = @At("HEAD"))
     private void captureTarget(Entity entityIn, String str, double x, double y, double z, int maxDistance, CallbackInfo ci) {

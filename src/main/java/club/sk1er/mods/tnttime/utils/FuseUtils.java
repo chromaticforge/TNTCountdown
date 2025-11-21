@@ -2,7 +2,6 @@ package club.sk1er.mods.tnttime.utils;
 
 import cc.polyfrost.oneconfig.config.core.OneColor;
 import cc.polyfrost.oneconfig.utils.hypixel.HypixelUtils;
-import club.sk1er.mods.tnttime.TNTTime;
 import club.sk1er.mods.tnttime.config.TNTTimeConfig;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.WorldClient;
@@ -16,7 +15,7 @@ import java.awt.*;
 import java.text.DecimalFormat;
 
 public class FuseUtils {
-    private static final DecimalFormat DECIMAL_FORMATTER = new DecimalFormat("0.00");
+    public static final DecimalFormat DECIMAL_FORMATTER = new DecimalFormat("0.00");
 
     // to adjust for Hypixel Bedwars
     public static boolean bedwars;
@@ -37,15 +36,17 @@ public class FuseUtils {
         OneColor start = TNTTimeConfig.startColor;
         OneColor end = TNTTimeConfig.endColor;
 
-        int r = (int)(end.getRed()   + progress * (start.getRed()   - end.getRed()));
-        int g = (int)(end.getGreen() + progress * (start.getGreen() - end.getGreen()));
-        int b = (int)(end.getBlue()  + progress * (start.getBlue()  - end.getBlue()));
+        int r = (int) (end.getRed() + progress * (start.getRed() - end.getRed()));
+        int g = (int) (end.getGreen() + progress * (start.getGreen() - end.getGreen()));
+        int b = (int) (end.getBlue() + progress * (start.getBlue() - end.getBlue()));
 
         return new Color(r, g, b);
     }
 
     public static String getTimer(int ticks) {
-        return DECIMAL_FORMATTER.format(ticks / 20f);
+        String time = DECIMAL_FORMATTER.format(ticks / 20f);
+
+        return TNTTimeConfig.timerText.replace("%VALUE%", time);
     }
 
     @SubscribeEvent

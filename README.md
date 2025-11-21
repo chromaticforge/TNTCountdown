@@ -8,11 +8,12 @@ Now with OneConfig.
 
 - Uses vanilla rendering (for mod compatibility)
 - Adds customization with OneConfig.
+  - Custom Text
+  - Custom Text color
 - No longer depends on essential.
 
 ### Planned features...
 
-- Custom text
 - Custom fuse times
   - Allow user defined (or create a database?) custom TNT fuse times for servers that modify it.
 
