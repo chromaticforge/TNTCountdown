@@ -2,6 +2,7 @@ package club.sk1er.mods.tnttime.utils;
 
 import cc.polyfrost.oneconfig.utils.hypixel.HypixelUtils;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.multiplayer.ServerData;
 import net.minecraft.client.multiplayer.WorldClient;
 import net.minecraft.scoreboard.ScoreObjective;
 import net.minecraft.scoreboard.Scoreboard;
@@ -13,7 +14,14 @@ public class ServerUtils {
     }
 
     public static boolean isMinemen() {
-        return Minecraft.getMinecraft().getCurrentServerData().serverIP.contains("minemen") || scoreboardContains("minemen");
+        return serverIPContains("minemen") || scoreboardContains("minemen");
+    }
+
+    private static boolean serverIPContains(String text) {
+        ServerData data = Minecraft.getMinecraft().getCurrentServerData();
+        if (data == null) return false;
+
+        return data.serverIP.contains(text);
     }
 
     private static boolean scoreboardContains(String text) {

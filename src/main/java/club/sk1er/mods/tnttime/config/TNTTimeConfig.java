@@ -21,12 +21,6 @@ public class TNTTimeConfig extends Config {
     )
     public static String timerText = "%VALUE%";
 
-    @Switch(
-            name = "Static Color",
-            description = "When enabled, the mod will not interpolate between two colors."
-    )
-    public static boolean staticColor = false;
-
     @Color(
             name = "Primary Color",
             description = "The primary color of the timer.",
@@ -52,8 +46,6 @@ public class TNTTimeConfig extends Config {
     public TNTTimeConfig() {
         super(new Mod(TNTTime.NAME, ModType.HYPIXEL), TNTTime.ID + ".json");
         initialize();
-
-        hideIf("endColor", () -> staticColor);
 
         hideIf("polyNametag", () -> Loader.isModLoaded("polynametag"));
     }

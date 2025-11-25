@@ -22,14 +22,10 @@ public class ConfigUtils {
     }
 
     public static Color getFuseColor(int ticks) {
-        if (!TNTTimeConfig.staticColor) {
-            float fuse = ServerFuses.getAdjustedFuse(ticks);
-            float divisor = ServerFuses.getAdjustedFuse(MAX_FUSE_TICKS);
-            float progress = Math.min(fuse / divisor, 1f);
-            return interpolateColor(progress);
-        } else {
-            return TNTTimeConfig.startColor.toJavaColor();
-        }
+        float fuse = ServerFuses.getAdjustedFuse(ticks);
+        float divisor = ServerFuses.getAdjustedFuse(MAX_FUSE_TICKS);
+        float progress = Math.min(fuse / divisor, 1f);
+        return interpolateColor(progress);
     }
 
     private static Color interpolateColor(float progress) {
