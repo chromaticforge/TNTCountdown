@@ -1,6 +1,6 @@
 package club.sk1er.mods.tnttime.mixins;
 
-import club.sk1er.mods.tnttime.utils.FuseUtils;
+import club.sk1er.mods.tnttime.utils.ConfigUtils;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.entity.RenderTNTPrimed;
@@ -21,9 +21,10 @@ public abstract class RenderTNTPrimedMixin extends Render<EntityTNTPrimed> {
             at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/entity/Render;doRender(Lnet/minecraft/entity/Entity;DDDFF)V")
     )
     private void drawNametag(EntityTNTPrimed entity, double x, double y, double z, float entityYaw, float partialTicks, CallbackInfo ci) {
-        final int fuseTimer = FuseUtils.bedwars ? entity.fuse - 28 : entity.fuse;
-        if (fuseTimer < 1) return;
-        String text = FuseUtils.getTimer(fuseTimer);
-        renderLivingLabel(entity, text, x, y, z, 64);
+        String text = ConfigUtils.getTimerText(entity.fuse);
+
+        if (text != null) { // text returns null when the fuse is 1 tick or lower after adjustment
+            renderLivingLabel(entity, text, x, y, z, 64);
+        }
     }
 }

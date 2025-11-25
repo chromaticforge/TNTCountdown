@@ -3,6 +3,7 @@ package club.sk1er.mods.tnttime.config;
 import cc.polyfrost.oneconfig.config.Config;
 import cc.polyfrost.oneconfig.config.annotations.Button;
 import cc.polyfrost.oneconfig.config.annotations.Color;
+import cc.polyfrost.oneconfig.config.annotations.Switch;
 import cc.polyfrost.oneconfig.config.annotations.Text;
 import cc.polyfrost.oneconfig.config.core.OneColor;
 import cc.polyfrost.oneconfig.config.data.Mod;
@@ -21,15 +22,15 @@ public class TNTTimeConfig extends Config {
     public static String timerText = "%VALUE%";
 
     @Color(
-            name = "Start Color",
-            description = "The color the timer starts at.",
+            name = "Primary Color",
+            description = "The primary color of the timer.",
             allowAlpha = false
     )
     public static OneColor startColor = new OneColor(0, 255, 0);
 
     @Color(
-            name = "End Color",
-            description = "The color the timer ends at.",
+            name = "Secondary Color",
+            description = "The secondary color of the timer.",
             allowAlpha = false
     )
     public static OneColor endColor = new OneColor(255, 0, 0);
