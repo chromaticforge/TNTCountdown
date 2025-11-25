@@ -14,12 +14,12 @@ public enum ServerFuses {
         this.condition = condition;
     }
 
-    public static int getAdjustedFuse(int fuse) {
+    public static int getAdjustment() {
         for (ServerFuses sf : values()) {
             if (sf.condition.get()) {
-                return fuse + sf.adjustment;
+                return sf.adjustment;
             }
         }
-        return fuse;
+        return 0;
     }
 }

@@ -9,10 +9,11 @@ import java.text.DecimalFormat;
 public class ConfigUtils {
     public static final DecimalFormat DECIMAL_FORMATTER = new DecimalFormat("0.00");
 
-    private static final int MAX_FUSE_TICKS = 80;
+    public static int ADJUSTMENT = 0;
+    public static int MAX_FUSE = 80;
 
-    public static String getTimerText(int fuse) {
-        final int fuseTimer = ServerFuses.getAdjustedFuse(fuse);
+    public static String getTimerText(int ticks) {
+        final int fuseTimer = getAdjustedFuse(ticks);
 
         if (fuseTimer < 1) return null;
 
@@ -22,10 +23,14 @@ public class ConfigUtils {
     }
 
     public static Color getFuseColor(int ticks) {
-        float fuse = ServerFuses.getAdjustedFuse(ticks);
-        float divisor = ServerFuses.getAdjustedFuse(MAX_FUSE_TICKS);
+        float fuse = getAdjustedFuse(ticks);
+        float divisor = MAX_FUSE;
         float progress = Math.min(fuse / divisor, 1f);
         return interpolateColor(progress);
+    }
+
+    private static int getAdjustedFuse(int ticks) {
+        return ticks + ADJUSTMENT;
     }
 
     private static Color interpolateColor(float progress) {
